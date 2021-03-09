@@ -1,1 +1,1 @@
-# Simple GNaughts and Crosses
+# Simple Naughts and Crosses
