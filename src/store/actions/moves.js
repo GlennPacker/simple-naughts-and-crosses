@@ -1,5 +1,6 @@
 export const SELECT_CELL = 'SELECT_CELL',
-  SET_WINNER = 'SET_WINNER';
+  SET_WINNER = 'SET_WINNER',
+  NO_WINNER = 'NO_WINNER';
 
 export function selectCell(currentPlayer, row, col) {
   return {
@@ -14,5 +15,11 @@ export function setWinner(winner) {
   return {
     type: SET_WINNER,
     winner
+  }
+}
+
+export function noWinner() {
+  return {
+    type: NO_WINNER,
   }
 }

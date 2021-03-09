@@ -32,6 +32,7 @@ describe('board', () => {
 describe('game', () => {
   it('should create a default game state with current player and no winner', () => {
     const expectedState = {
+      allLose: false,
       currentPlayer: 'X',
       winner: null
     }
@@ -41,8 +42,8 @@ describe('game', () => {
   })
 
   it('should update a co-ordinate to match the currentPlayer', () => {
-    const xState = { currentPlayer: 'X', winner: null }
-    const oState = { currentPlayer: 'O', winner: null }
+    const xState = { currentPlayer: 'X', winner: null, allLose: false }
+    const oState = { currentPlayer: 'O', winner: null, allLose: false }
 
     const xResult = game(xState, Actions.selectCell('X', 0, 0))
     const oResult = game(oState, Actions.selectCell('X', 0, 0))
@@ -51,11 +52,20 @@ describe('game', () => {
     expect(oResult).toEqual(xState)
   })
 
-  it('should set the winnder', () => {
-    const state = { currentPlayer: 'O', winner: null }
-    const expectedResult = { currentPlayer: 'O', winner: 'X' }
+  it('should set the winner', () => {
+    const state = { allLose: false, currentPlayer: 'O', winner: null }
+    const expectedResult = { allLose: false, currentPlayer: 'O', winner: 'X' }
 
     const result = game(state, Actions.setWinner('X'))
+
+    expect(result).toEqual(expectedResult);
+  })
+
+  it('should set the allLose flag', () => {
+    const state = { currentPlayer: 'O', winner: null, allLose: false }
+    const expectedResult = { currentPlayer: 'O', winner: null, allLose: true }
+
+    const result = game(state, Actions.noWinner())
 
     expect(result).toEqual(expectedResult);
   })
