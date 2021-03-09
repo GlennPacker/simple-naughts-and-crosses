@@ -218,3 +218,25 @@ test('clicking a cell a second time should not take a turn', () => {
   expect(winnerText).toBeInTheDocument();
 })
 
+test('no win situation', () => {
+  render(
+    <Provider store={configureStore()}><Board /></Provider>
+  )
+
+  act(() => {
+    screen.getByTestId('00').click();
+    screen.getByTestId('01').click();
+    screen.getByTestId('02').click();
+    screen.getByTestId('10').click();
+    screen.getByTestId('11').click();
+    screen.getByTestId('12').click();
+    screen.getByTestId('20').click();
+    screen.getByTestId('21').click();
+    screen.getByTestId('22').click();
+  })
+
+  const winnerText = screen.getByText(/Sorry there are no winners/);
+  expect(winnerText).toBeInTheDocument();
+})
+
+

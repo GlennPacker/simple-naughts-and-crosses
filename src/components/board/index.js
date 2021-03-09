@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './index.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCell, setWinner } from '../../store/actions/moves';
+import { selectCell, setWinner, noWinner } from '../../store/actions/moves';
 
 const selectBoard = (state) => state.board
 const selectGame = (state) => state.game
@@ -10,7 +10,7 @@ export const Board = () => {
   const board = useSelector(selectBoard)
   const game = useSelector(selectGame)
   const dispatch = useDispatch()
-  const notPlayer = game.currentPlayer === 'X' ? 'O' : 'X'
+  const notPlayer = game.currentPlayer === 'X' ? 'O' : 'X';
 
   const hasWinner = (board, notPlayer) => {
     const waysToWin = [`${board[0][0]}${board[0][1]}${board[0][2]}`,
@@ -27,6 +27,9 @@ export const Board = () => {
   }
 
   useEffect(() => {
+    if (!board.some(row => row.some(cell => !cell))) {
+      dispatch(noWinner());
+    }
     if (hasWinner(board, notPlayer)) {
       dispatch(setWinner(notPlayer));
     }
@@ -47,15 +50,20 @@ export const Board = () => {
 
   return (
     <div className="Board">
-      <div>
-        Board
-      </div>
-      { game.winner ?
+
+      { game.allLose ?
+        <div>
+          Sorry there are no winners
+        </div>
+      : game.winner ?
         <div>
           Winner { game.winner }
         </div>
-        :
+      :
         <>
+          <div>
+            Board
+          </div>
           <div className="grid-container">
             {
               board.map((row, r) =>

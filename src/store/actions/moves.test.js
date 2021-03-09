@@ -23,3 +23,13 @@ describe('setWinner', () => {
     expect(result).toEqual(expectedAction)
   })
 })
+
+describe('noWinner', () => {
+  it('should create an action to set the Win situation', () => {
+    const expectedAction = {
+      type: Actions.NO_WINNER,
+    }
+    const result = Actions.noWinner()
+    expect(result).toEqual(expectedAction)
+  })
+})
