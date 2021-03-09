@@ -27,6 +27,42 @@ test('renders all the cells', () => {
   expect(screen.getByTestId('22')).not.toBe(null);
 })
 
+
+test('the first cell taken in the game should be X', () => {
+  render(
+    <Provider store={configureStore()}><Board /></Provider>
+  )
+
+  act(() => {
+    screen.getByTestId('00').click();
+  })
+
+  expect(screen.getByTestId('00').textContent).toBe('X');
+
+  const winnerText = screen.getByText(/Player O/);
+  expect(winnerText).toBeInTheDocument();
+})
+
+test('the second cell taken in the game should be O', () => {
+  render(
+    <Provider store={configureStore()}><Board /></Provider>
+  )
+
+  act(() => {
+    screen.getByTestId('00').click();
+  })
+
+  act(() => {
+    screen.getByTestId('01').click();
+  })
+
+  expect(screen.getByTestId('00').textContent).toBe('X');
+  expect(screen.getByTestId('01').textContent).toBe('O');
+
+  const winnerText = screen.getByText(/Player X/);
+  expect(winnerText).toBeInTheDocument();
+})
+
 test('first row wins', () => {
   render(
     <Provider store={configureStore()}><Board /></Provider>
