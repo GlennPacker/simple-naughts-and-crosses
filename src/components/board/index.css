@@ -1,0 +1,31 @@
+.Board {
+  margin: auto;
+}
+.grid-container {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid-container div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 6rem;
+  width: 6rem;
+  font-size: 40px;
+}
+
+.grid-container div {
+  border-bottom: 1px solid #888;
+  border-right: 1px solid #888;
+}
+
+.grid-container div:nth-child(3n) {
+  border-right: none;
+}
+
+.grid-container div:nth-child(7),
+.grid-container div:nth-child(8),
+.grid-container div:nth-child(9) {
+  border-bottom: none;
+}

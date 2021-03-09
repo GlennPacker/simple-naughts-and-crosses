@@ -1,2 +1,1 @@
-# simple-naughts-and-crosses
-react, redux, react hooks
+# Simple GNaughts and Crosses
