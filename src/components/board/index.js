@@ -33,8 +33,9 @@ export const Board = () => {
   }, [board, notPlayer, dispatch])
 
 
-  const cellClick = (event, row, col) => {
+  const cellClick = (event, row, col, cell) => {
     event.preventDefault();
+    if (cell) return;
     dispatch(
       selectCell(
         game.currentPlayer,
@@ -62,7 +63,7 @@ export const Board = () => {
                   <div
                     key={ `${r}${c}` }
                     data-testid={ `${r}${c}` }
-                    onClick={(e) => cellClick(e, r, c) }
+                    onClick={(e) => cellClick(e, r, c, cell) }
                   >
                     { cell }
                   </div>

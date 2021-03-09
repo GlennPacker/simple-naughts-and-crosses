@@ -198,3 +198,23 @@ test('diagnal 2 wins', () => {
   const winnerText = screen.getByText(/Winner/);
   expect(winnerText).toBeInTheDocument();
 })
+
+test('clicking a cell a second time should not take a turn', () => {
+  render(
+    <Provider store={configureStore()}><Board /></Provider>
+  )
+
+  act(() => {
+    screen.getByTestId('00').click();
+  })
+
+  act(() => {
+    screen.getByTestId('00').click();
+  })
+
+  expect(screen.getByTestId('00').textContent).toBe('X');
+
+  const winnerText = screen.getByText(/Player O/);
+  expect(winnerText).toBeInTheDocument();
+})
+
